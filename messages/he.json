@@ -1,0 +1,180 @@
+{
+  "app": {
+    "name": "דיווח שעות"
+  },
+  "nav": {
+    "dashboard": "לוח בקרה",
+    "history": "ההיסטוריה שלי",
+    "reports": "דוחות",
+    "approvals": "אישורים",
+    "delegation": "האצלה",
+    "team": "הצוות שלי",
+    "admin": "ניהול",
+    "settings": "הגדרות",
+    "upload": "העלאה המונית",
+    "profile": "פרופיל",
+    "signOut": "התנתק"
+  },
+  "login": {
+    "title": "כניסה ל-{orgName}",
+    "subtitle": "השתמש בחשבון הארגוני שלך",
+    "signInWith": "כניסה עם {provider}",
+    "microsoft": "Microsoft",
+    "okta": "Okta"
+  },
+  "dashboard": {
+    "title": "לוח בקרה",
+    "clockIn": "כניסה לעבודה",
+    "clockOut": "יציאה מהעבודה",
+    "clockedInSince": "בעבודה מאז {time}",
+    "notClockedIn": "לא רשום בעבודה",
+    "todayHours": "היום",
+    "weekHours": "השבוע",
+    "monthHours": "החודש"
+  },
+  "history": {
+    "title": "היסטוריית שעות",
+    "date": "תאריך",
+    "type": "סוג",
+    "clockIn": "כניסה",
+    "clockOut": "יציאה",
+    "duration": "משך",
+    "status": "סטטוס",
+    "notes": "הערות",
+    "noEntries": "לא נמצאו רשומות."
+  },
+  "entryType": {
+    "WORK": "עבודה",
+    "VACATION": "חופשה",
+    "SICK": "מחלה",
+    "CHILD_SICK": "מחלת ילד",
+    "MILITARY": "שירות מילואים",
+    "MANUAL": "דיווח ידני"
+  },
+  "entryStatus": {
+    "PENDING": "ממתין לאישור",
+    "APPROVED": "אושר",
+    "REJECTED": "נדחה"
+  },
+  "absence": {
+    "title": "דיווח היעדרות",
+    "type": "סוג",
+    "from": "מ-",
+    "to": "עד",
+    "notes": "הערות (אופציונלי)",
+    "submit": "שלח",
+    "success": "ההיעדרות נשלחה לאישור."
+  },
+  "manual": {
+    "title": "דיווח ידני",
+    "date": "תאריך",
+    "clockIn": "שעת התחלה",
+    "clockOut": "שעת סיום",
+    "notes": "הערות",
+    "submit": "שלח לאישור",
+    "success": "הדיווח הידני נשלח לאישור."
+  },
+  "approvals": {
+    "title": "אישורים ממתינים",
+    "employee": "עובד",
+    "type": "סוג",
+    "period": "תקופה",
+    "submitted": "הוגש",
+    "approve": "אשר",
+    "reject": "דחה",
+    "comment": "הערה (אופציונלי)",
+    "noItems": "אין אישורים ממתינים.",
+    "approvedSuccess": "הרשומה אושרה.",
+    "rejectedSuccess": "הרשומה נדחתה."
+  },
+  "delegation": {
+    "title": "האצלת אישורים",
+    "delegate": "ממלא מקום",
+    "from": "מ- (אופציונלי)",
+    "to": "עד (אופציונלי)",
+    "save": "שמור האצלה",
+    "clear": "בטל האצלה",
+    "current": "ממלא מקום נוכחי: {name}",
+    "none": "אין האצלה מוגדרת.",
+    "success": "ההאצלה נשמרה."
+  },
+  "team": {
+    "title": "סיכום צוות",
+    "employee": "עובד",
+    "totalHours": "סה\"כ שעות",
+    "absenceDays": "ימי היעדרות",
+    "pending": "ממתין לאישור"
+  },
+  "reports": {
+    "title": "דוח שעות",
+    "period": "תקופה",
+    "day": "יום",
+    "week": "שבוע",
+    "month": "חודש",
+    "exportCsv": "ייצוא CSV"
+  },
+  "admin": {
+    "title": "ניהול",
+    "users": "משתמשים",
+    "entries": "כל הרשומות",
+    "role": "תפקיד",
+    "manager": "מנהל",
+    "save": "שמור",
+    "exportCsv": "ייצוא CSV"
+  },
+  "settings": {
+    "title": "הגדרות ארגון",
+    "branding": "מיתוג",
+    "orgName": "שם הארגון",
+    "logoUrl": "כתובת לוגו",
+    "primaryColor": "צבע ראשי",
+    "schedule": "שעות עבודה",
+    "workDays": "ימי עבודה",
+    "workStart": "שעת התחלה",
+    "workEnd": "שעת סיום",
+    "weekStart": "תחילת שבוע",
+    "save": "שמור הגדרות",
+    "success": "ההגדרות נשמרו.",
+    "days": {
+      "0": "ראשון",
+      "1": "שני",
+      "2": "שלישי",
+      "3": "רביעי",
+      "4": "חמישי",
+      "5": "שישי",
+      "6": "שבת"
+    }
+  },
+  "profile": {
+    "title": "פרופיל",
+    "language": "שפה",
+    "notifications": "התראות",
+    "email": "התראות אימייל",
+    "browser": "התראות דפדפן",
+    "sms": "התראות SMS",
+    "phone": "מספר טלפון",
+    "save": "שמור",
+    "success": "הפרופיל נשמר."
+  },
+  "upload": {
+    "title": "העלאה המונית",
+    "description": "העלה קובץ CSV או Excel ליצירת רשומות מרובות.",
+    "template": "הורד תבנית",
+    "choose": "בחר קובץ",
+    "submit": "העלה",
+    "results": "תוצאות",
+    "created": "{count} רשומות נוצרו.",
+    "errors": "{count} שורות נכשלו:"
+  },
+  "location": {
+    "captured": "מיקום נרשם",
+    "denied": "מיקום לא זמין",
+    "unknown": "מיקום לא ידוע"
+  },
+  "errors": {
+    "generic": "אירעה שגיאה. נסה שוב.",
+    "alreadyClockedIn": "כבר רשום בעבודה.",
+    "noOpenEntry": "לא נמצאה כניסה פתוחה.",
+    "unauthorized": "אין הרשאה."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "hours-reporting",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "scheduler": "ts-node --project tsconfig.json -e \"require('./src/lib/scheduler').startScheduler()\"",
+    "build": "next build",
+    "start": "next start",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.11.1",
+    "@prisma/client": "^7.4.2",
+    "@react-email/components": "^1.0.8",
+    "next": "16.1.6",
+    "next-auth": "^5.0.0-beta.30",
+    "next-intl": "^4.8.3",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^7.0.13",
+    "papaparse": "^5.5.3",
+    "prisma": "^7.4.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "recharts": "^3.7.0",
+    "twilio": "^5.12.2",
+    "web-push": "^3.6.7",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/node-cron": "^3.0.11",
+    "@types/nodemailer": "^7.0.11",
+    "@types/papaparse": "^5.5.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/web-push": "^3.6.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

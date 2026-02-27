@@ -1,0 +1,180 @@
+{
+  "app": {
+    "name": "تقرير ساعات العمل"
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "history": "سجلّي",
+    "reports": "التقارير",
+    "approvals": "الموافقات",
+    "delegation": "التفويض",
+    "team": "فريقي",
+    "admin": "الإدارة",
+    "settings": "الإعدادات",
+    "upload": "الرفع الجماعي",
+    "profile": "الملف الشخصي",
+    "signOut": "تسجيل الخروج"
+  },
+  "login": {
+    "title": "تسجيل الدخول إلى {orgName}",
+    "subtitle": "استخدم حساب مؤسستك",
+    "signInWith": "تسجيل الدخول بـ {provider}",
+    "microsoft": "Microsoft",
+    "okta": "Okta"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "clockIn": "تسجيل الحضور",
+    "clockOut": "تسجيل الانصراف",
+    "clockedInSince": "حاضر منذ {time}",
+    "notClockedIn": "لم يتم تسجيل الحضور",
+    "todayHours": "اليوم",
+    "weekHours": "هذا الأسبوع",
+    "monthHours": "هذا الشهر"
+  },
+  "history": {
+    "title": "سجل ساعات العمل",
+    "date": "التاريخ",
+    "type": "النوع",
+    "clockIn": "الحضور",
+    "clockOut": "الانصراف",
+    "duration": "المدة",
+    "status": "الحالة",
+    "notes": "ملاحظات",
+    "noEntries": "لا توجد سجلات."
+  },
+  "entryType": {
+    "WORK": "عمل",
+    "VACATION": "إجازة",
+    "SICK": "إجازة مرضية",
+    "CHILD_SICK": "إجازة مرافقة طفل مريض",
+    "MILITARY": "خدمة عسكرية",
+    "MANUAL": "إدخال يدوي"
+  },
+  "entryStatus": {
+    "PENDING": "بانتظار الموافقة",
+    "APPROVED": "تمت الموافقة",
+    "REJECTED": "مرفوض"
+  },
+  "absence": {
+    "title": "الإبلاغ عن غياب",
+    "type": "النوع",
+    "from": "من",
+    "to": "إلى",
+    "notes": "ملاحظات (اختياري)",
+    "submit": "إرسال",
+    "success": "تم إرسال الغياب للموافقة."
+  },
+  "manual": {
+    "title": "إدخال يدوي",
+    "date": "التاريخ",
+    "clockIn": "وقت البدء",
+    "clockOut": "وقت الانتهاء",
+    "notes": "ملاحظات",
+    "submit": "إرسال للموافقة",
+    "success": "تم إرسال الإدخال اليدوي للموافقة."
+  },
+  "approvals": {
+    "title": "الموافقات المعلّقة",
+    "employee": "الموظف",
+    "type": "النوع",
+    "period": "الفترة",
+    "submitted": "تاريخ الإرسال",
+    "approve": "موافقة",
+    "reject": "رفض",
+    "comment": "تعليق (اختياري)",
+    "noItems": "لا توجد موافقات معلّقة.",
+    "approvedSuccess": "تمت الموافقة على السجل.",
+    "rejectedSuccess": "تم رفض السجل."
+  },
+  "delegation": {
+    "title": "تفويض الموافقات",
+    "delegate": "المفوَّض",
+    "from": "من (اختياري)",
+    "to": "إلى (اختياري)",
+    "save": "حفظ التفويض",
+    "clear": "إلغاء التفويض",
+    "current": "المفوَّض الحالي: {name}",
+    "none": "لا يوجد تفويض.",
+    "success": "تم حفظ التفويض."
+  },
+  "team": {
+    "title": "ملخص الفريق",
+    "employee": "الموظف",
+    "totalHours": "إجمالي الساعات",
+    "absenceDays": "أيام الغياب",
+    "pending": "معلّق"
+  },
+  "reports": {
+    "title": "تقرير ساعاتي",
+    "period": "الفترة",
+    "day": "يوم",
+    "week": "أسبوع",
+    "month": "شهر",
+    "exportCsv": "تصدير CSV"
+  },
+  "admin": {
+    "title": "الإدارة",
+    "users": "المستخدمون",
+    "entries": "جميع السجلات",
+    "role": "الدور",
+    "manager": "المدير",
+    "save": "حفظ",
+    "exportCsv": "تصدير CSV"
+  },
+  "settings": {
+    "title": "إعدادات المؤسسة",
+    "branding": "الهوية البصرية",
+    "orgName": "اسم المؤسسة",
+    "logoUrl": "رابط الشعار",
+    "primaryColor": "اللون الرئيسي",
+    "schedule": "جدول العمل",
+    "workDays": "أيام العمل",
+    "workStart": "وقت البدء",
+    "workEnd": "وقت الانتهاء",
+    "weekStart": "بداية الأسبوع",
+    "save": "حفظ الإعدادات",
+    "success": "تم حفظ الإعدادات.",
+    "days": {
+      "0": "الأحد",
+      "1": "الاثنين",
+      "2": "الثلاثاء",
+      "3": "الأربعاء",
+      "4": "الخميس",
+      "5": "الجمعة",
+      "6": "السبت"
+    }
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "language": "اللغة",
+    "notifications": "الإشعارات",
+    "email": "إشعارات البريد الإلكتروني",
+    "browser": "إشعارات المتصفح",
+    "sms": "إشعارات SMS",
+    "phone": "رقم الهاتف",
+    "save": "حفظ",
+    "success": "تم حفظ الملف الشخصي."
+  },
+  "upload": {
+    "title": "الرفع الجماعي",
+    "description": "ارفع ملف CSV أو Excel لإنشاء سجلات متعددة.",
+    "template": "تنزيل النموذج",
+    "choose": "اختر ملفًا",
+    "submit": "رفع",
+    "results": "النتائج",
+    "created": "تم إنشاء {count} سجل.",
+    "errors": "{count} صف به أخطاء:"
+  },
+  "location": {
+    "captured": "تم تسجيل الموقع",
+    "denied": "الموقع غير متاح",
+    "unknown": "الموقع غير معروف"
+  },
+  "errors": {
+    "generic": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+    "alreadyClockedIn": "أنت مسجَّل بالفعل.",
+    "noOpenEntry": "لم يُعثر على تسجيل حضور مفتوح.",
+    "unauthorized": "غير مصرح."
+  }
+}

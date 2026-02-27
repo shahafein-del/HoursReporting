@@ -1,0 +1,180 @@
+{
+  "app": {
+    "name": "Rapport d'heures"
+  },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "history": "Mon historique",
+    "reports": "Rapports",
+    "approvals": "Approbations",
+    "delegation": "Délégation",
+    "team": "Mon équipe",
+    "admin": "Administration",
+    "settings": "Paramètres",
+    "upload": "Import en masse",
+    "profile": "Profil",
+    "signOut": "Se déconnecter"
+  },
+  "login": {
+    "title": "Connexion à {orgName}",
+    "subtitle": "Utilisez votre compte d'organisation",
+    "signInWith": "Se connecter avec {provider}",
+    "microsoft": "Microsoft",
+    "okta": "Okta"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "clockIn": "Pointer l'arrivée",
+    "clockOut": "Pointer le départ",
+    "clockedInSince": "Pointé depuis {time}",
+    "notClockedIn": "Non pointé",
+    "todayHours": "Aujourd'hui",
+    "weekHours": "Cette semaine",
+    "monthHours": "Ce mois"
+  },
+  "history": {
+    "title": "Historique des heures",
+    "date": "Date",
+    "type": "Type",
+    "clockIn": "Arrivée",
+    "clockOut": "Départ",
+    "duration": "Durée",
+    "status": "Statut",
+    "notes": "Notes",
+    "noEntries": "Aucun enregistrement."
+  },
+  "entryType": {
+    "WORK": "Travail",
+    "VACATION": "Congé",
+    "SICK": "Arrêt maladie",
+    "CHILD_SICK": "Enfant malade",
+    "MILITARY": "Service militaire",
+    "MANUAL": "Saisie manuelle"
+  },
+  "entryStatus": {
+    "PENDING": "En attente",
+    "APPROVED": "Approuvé",
+    "REJECTED": "Refusé"
+  },
+  "absence": {
+    "title": "Déclarer une absence",
+    "type": "Type",
+    "from": "Du",
+    "to": "Au",
+    "notes": "Notes (optionnel)",
+    "submit": "Envoyer",
+    "success": "Absence soumise pour approbation."
+  },
+  "manual": {
+    "title": "Saisie manuelle",
+    "date": "Date",
+    "clockIn": "Heure de début",
+    "clockOut": "Heure de fin",
+    "notes": "Notes",
+    "submit": "Soumettre pour approbation",
+    "success": "Saisie manuelle soumise pour approbation."
+  },
+  "approvals": {
+    "title": "Approbations en attente",
+    "employee": "Employé",
+    "type": "Type",
+    "period": "Période",
+    "submitted": "Soumis le",
+    "approve": "Approuver",
+    "reject": "Refuser",
+    "comment": "Commentaire (optionnel)",
+    "noItems": "Aucune approbation en attente.",
+    "approvedSuccess": "Entrée approuvée.",
+    "rejectedSuccess": "Entrée refusée."
+  },
+  "delegation": {
+    "title": "Délégation d'approbations",
+    "delegate": "Délégué",
+    "from": "Du (optionnel)",
+    "to": "Au (optionnel)",
+    "save": "Enregistrer la délégation",
+    "clear": "Supprimer la délégation",
+    "current": "Délégué actuel : {name}",
+    "none": "Aucune délégation.",
+    "success": "Délégation enregistrée."
+  },
+  "team": {
+    "title": "Résumé équipe",
+    "employee": "Employé",
+    "totalHours": "Total heures",
+    "absenceDays": "Jours d'absence",
+    "pending": "En attente"
+  },
+  "reports": {
+    "title": "Rapport d'heures",
+    "period": "Période",
+    "day": "Jour",
+    "week": "Semaine",
+    "month": "Mois",
+    "exportCsv": "Exporter CSV"
+  },
+  "admin": {
+    "title": "Administration",
+    "users": "Utilisateurs",
+    "entries": "Toutes les entrées",
+    "role": "Rôle",
+    "manager": "Responsable",
+    "save": "Enregistrer",
+    "exportCsv": "Exporter CSV"
+  },
+  "settings": {
+    "title": "Paramètres de l'organisation",
+    "branding": "Identité visuelle",
+    "orgName": "Nom de l'organisation",
+    "logoUrl": "URL du logo",
+    "primaryColor": "Couleur principale",
+    "schedule": "Horaires de travail",
+    "workDays": "Jours de travail",
+    "workStart": "Heure de début",
+    "workEnd": "Heure de fin",
+    "weekStart": "Début de semaine",
+    "save": "Enregistrer",
+    "success": "Paramètres enregistrés.",
+    "days": {
+      "0": "Dimanche",
+      "1": "Lundi",
+      "2": "Mardi",
+      "3": "Mercredi",
+      "4": "Jeudi",
+      "5": "Vendredi",
+      "6": "Samedi"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Langue",
+    "notifications": "Notifications",
+    "email": "Notifications e-mail",
+    "browser": "Notifications navigateur",
+    "sms": "Notifications SMS",
+    "phone": "Numéro de téléphone",
+    "save": "Enregistrer",
+    "success": "Profil enregistré."
+  },
+  "upload": {
+    "title": "Import en masse",
+    "description": "Importez un fichier CSV ou Excel pour créer plusieurs entrées.",
+    "template": "Télécharger le modèle",
+    "choose": "Choisir un fichier",
+    "submit": "Importer",
+    "results": "Résultats",
+    "created": "{count} entrées créées.",
+    "errors": "{count} lignes en erreur :"
+  },
+  "location": {
+    "captured": "Position enregistrée",
+    "denied": "Position non disponible",
+    "unknown": "Position inconnue"
+  },
+  "errors": {
+    "generic": "Une erreur est survenue. Veuillez réessayer.",
+    "alreadyClockedIn": "Vous êtes déjà pointé.",
+    "noOpenEntry": "Aucun pointage ouvert trouvé.",
+    "unauthorized": "Non autorisé."
+  }
+}

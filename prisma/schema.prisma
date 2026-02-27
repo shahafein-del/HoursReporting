@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── NextAuth Adapter Models ─────────────────────────────────────────────────
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ─── Application Models ───────────────────────────────────────────────────────
+
+model User {
+  id     String @id @default(cuid())
+  email  String @unique
+  name   String?
+  image  String?
+  role   Role   @default(EMPLOYEE)
+  locale String @default("en")
+
+  // Organisational hierarchy
+  managerId String?
+  manager   User?   @relation("reports", fields: [managerId], references: [id])
+  reports   User[]  @relation("reports")
+
+  // Approval delegation: this manager has delegated approvals to delegateId
+  delegateId   String?
+  delegateFrom DateTime?
+  delegateTo   DateTime?
+
+  // Notification preferences
+  notifyBrowser    Boolean @default(true)
+  notifyEmail      Boolean @default(true)
+  notifySms        Boolean @default(false)
+  phone            String?
+  pushSubscription String? @db.Text // JSON-serialised Web Push subscription
+
+  accounts    Account[]
+  sessions    Session[]
+  timeEntries TimeEntry[]
+
+  createdAt DateTime @default(now())
+}
+
+model TimeEntry {
+  id     String      @id @default(cuid())
+  userId String
+  user   User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type   EntryType   @default(WORK)
+  status EntryStatus @default(APPROVED)
+
+  // WORK type: clock in/out with optional geolocation
+  clockIn          DateTime?
+  clockInLat       Float?
+  clockInLng       Float?
+  clockInAccuracy  Float?
+  clockOut         DateTime?
+  clockOutLat      Float?
+  clockOutLng      Float?
+  clockOutAccuracy Float?
+
+  // Non-WORK types: date range
+  dateFrom DateTime?
+  dateTo   DateTime?
+
+  // Approval metadata
+  approvedById    String?
+  approvalComment String?
+  approvedAt      DateTime?
+
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrganizationSettings {
+  id           String  @id @default("singleton")
+  orgName      String  @default("My Organization")
+  logoUrl      String?
+  primaryColor String  @default("#2563eb")
+
+  // Working schedule
+  workDays      Int[]  @default([1, 2, 3, 4, 5]) // 0=Sun … 6=Sat
+  workStartTime String @default("09:00") // HH:mm 24h
+  workEndTime   String @default("18:00") // HH:mm 24h
+  weekStartDay  Int    @default(1) // 0=Sun, 1=Mon
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  EMPLOYEE
+  MANAGER
+  ADMIN
+}
+
+enum EntryType {
+  WORK // Regular clock-in / clock-out — auto-approved
+  VACATION
+  SICK
+  CHILD_SICK
+  MILITARY
+  MANUAL // Manual time correction submitted by employee
+}
+
+enum EntryStatus {
+  PENDING // Awaiting manager approval (all non-WORK entries start here)
+  APPROVED
+  REJECTED
+}

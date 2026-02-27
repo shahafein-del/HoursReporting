@@ -1,0 +1,180 @@
+{
+  "app": {
+    "name": "Hours Reporting"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "history": "My History",
+    "reports": "Reports",
+    "approvals": "Approvals",
+    "delegation": "Delegation",
+    "team": "My Team",
+    "admin": "Admin",
+    "settings": "Settings",
+    "upload": "Mass Upload",
+    "profile": "Profile",
+    "signOut": "Sign Out"
+  },
+  "login": {
+    "title": "Sign in to {orgName}",
+    "subtitle": "Use your organisation account",
+    "signInWith": "Sign in with {provider}",
+    "microsoft": "Microsoft",
+    "okta": "Okta"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out",
+    "clockedInSince": "Clocked in since {time}",
+    "notClockedIn": "Not clocked in",
+    "todayHours": "Today",
+    "weekHours": "This Week",
+    "monthHours": "This Month"
+  },
+  "history": {
+    "title": "My Time History",
+    "date": "Date",
+    "type": "Type",
+    "clockIn": "Clock In",
+    "clockOut": "Clock Out",
+    "duration": "Duration",
+    "status": "Status",
+    "notes": "Notes",
+    "noEntries": "No entries found."
+  },
+  "entryType": {
+    "WORK": "Work",
+    "VACATION": "Vacation",
+    "SICK": "Sick Leave",
+    "CHILD_SICK": "Child Sick Leave",
+    "MILITARY": "Military Service",
+    "MANUAL": "Manual Entry"
+  },
+  "entryStatus": {
+    "PENDING": "Pending",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected"
+  },
+  "absence": {
+    "title": "Report Absence",
+    "type": "Type",
+    "from": "From",
+    "to": "To",
+    "notes": "Notes (optional)",
+    "submit": "Submit",
+    "success": "Absence submitted for approval."
+  },
+  "manual": {
+    "title": "Manual Time Entry",
+    "date": "Date",
+    "clockIn": "Start Time",
+    "clockOut": "End Time",
+    "notes": "Notes",
+    "submit": "Submit for Approval",
+    "success": "Manual entry submitted for approval."
+  },
+  "approvals": {
+    "title": "Pending Approvals",
+    "employee": "Employee",
+    "type": "Type",
+    "period": "Period",
+    "submitted": "Submitted",
+    "approve": "Approve",
+    "reject": "Reject",
+    "comment": "Comment (optional)",
+    "noItems": "No pending approvals.",
+    "approvedSuccess": "Entry approved.",
+    "rejectedSuccess": "Entry rejected."
+  },
+  "delegation": {
+    "title": "Approval Delegation",
+    "delegate": "Delegate",
+    "from": "From (optional)",
+    "to": "To (optional)",
+    "save": "Save Delegation",
+    "clear": "Clear Delegation",
+    "current": "Current delegate: {name}",
+    "none": "No delegation set.",
+    "success": "Delegation saved."
+  },
+  "team": {
+    "title": "Team Summary",
+    "employee": "Employee",
+    "totalHours": "Total Hours",
+    "absenceDays": "Absence Days",
+    "pending": "Pending"
+  },
+  "reports": {
+    "title": "My Hours Report",
+    "period": "Period",
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "exportCsv": "Export CSV"
+  },
+  "admin": {
+    "title": "Administration",
+    "users": "Users",
+    "entries": "All Entries",
+    "role": "Role",
+    "manager": "Manager",
+    "save": "Save",
+    "exportCsv": "Export CSV"
+  },
+  "settings": {
+    "title": "Organisation Settings",
+    "branding": "Branding",
+    "orgName": "Organisation Name",
+    "logoUrl": "Logo URL",
+    "primaryColor": "Primary Colour",
+    "schedule": "Working Schedule",
+    "workDays": "Working Days",
+    "workStart": "Start Time",
+    "workEnd": "End Time",
+    "weekStart": "Week Starts On",
+    "save": "Save Settings",
+    "success": "Settings saved.",
+    "days": {
+      "0": "Sunday",
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "language": "Language",
+    "notifications": "Notifications",
+    "email": "Email notifications",
+    "browser": "Browser push notifications",
+    "sms": "SMS notifications",
+    "phone": "Phone number",
+    "save": "Save",
+    "success": "Profile saved."
+  },
+  "upload": {
+    "title": "Mass Upload",
+    "description": "Upload a CSV or Excel file to create multiple time entries at once.",
+    "template": "Download template",
+    "choose": "Choose file",
+    "submit": "Upload",
+    "results": "Results",
+    "created": "{count} entries created.",
+    "errors": "{count} rows had errors:"
+  },
+  "location": {
+    "captured": "Location captured",
+    "denied": "Location not available",
+    "unknown": "Location unknown"
+  },
+  "errors": {
+    "generic": "An error occurred. Please try again.",
+    "alreadyClockedIn": "You are already clocked in.",
+    "noOpenEntry": "No open clock-in found.",
+    "unauthorized": "Unauthorised."
+  }
+}
