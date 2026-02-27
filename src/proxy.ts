@@ -6,13 +6,12 @@ import type { NextRequest } from "next/server";
 
 const intlMiddleware = createMiddleware(routing);
 
-// Routes that don't require authentication
 const publicRoutes = ["/login", "/api/auth"];
 
-export default async function middleware(request: NextRequest) {
+export default auth(async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Allow cron routes only with the secret header
+  // Cron routes: require the shared secret header
   if (pathname.startsWith("/api/cron/")) {
     const secret = request.headers.get("x-cron-secret");
     if (!secret || secret !== process.env.CRON_SECRET) {
@@ -21,7 +20,6 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Strip locale prefix to check the raw path
   const localePattern = /^\/(en|he|ar|fr)(\/|$)/;
   const pathWithoutLocale = pathname.replace(localePattern, "/");
 
@@ -30,13 +28,9 @@ export default async function middleware(request: NextRequest) {
   );
 
   if (!isPublic && !pathname.startsWith("/api/")) {
-    // Apply next-intl locale routing for page routes
-    const intlResponse = intlMiddleware(request);
+    const session = (request as NextRequest & { auth: unknown }).auth;
 
-    // Check auth
-    const session = await auth();
     if (!session) {
-      // Detect locale from URL for redirect
       const localeMatch = pathname.match(/^\/(en|he|ar|fr)/);
       const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
       const loginUrl = new URL(`/${locale}/login`, request.url);
@@ -44,10 +38,9 @@ export default async function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    // Role guard: /admin routes require ADMIN or MANAGER
+    const role = (session as { user?: { role?: string } }).user?.role;
     const isAdminRoute = pathWithoutLocale.startsWith("/admin");
     const isManagerRoute = pathWithoutLocale.startsWith("/manager");
-    const role = session.user.role;
 
     if (isAdminRoute && role !== "ADMIN") {
       const localeMatch = pathname.match(/^\/(en|he|ar|fr)/);
@@ -61,16 +54,15 @@ export default async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
     }
 
-    return intlResponse ?? NextResponse.next();
+    return intlMiddleware(request) ?? NextResponse.next();
   }
 
-  // For public page routes, still apply locale middleware
   if (!pathname.startsWith("/api/")) {
     return intlMiddleware(request);
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
   matcher: [
