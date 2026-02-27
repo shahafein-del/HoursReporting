@@ -42,7 +42,7 @@ export default async function LocaleLayout({
       <body className="bg-gray-50 text-gray-900 min-h-screen">
         <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages}>
-            {session && (
+            {session?.user && (
               <Navbar
                 locale={locale}
                 role={session.user.role}

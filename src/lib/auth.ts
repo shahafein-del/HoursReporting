@@ -20,27 +20,47 @@ function getEmailRole(email: string): Role | null {
   return null;
 }
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
-  providers: [
+const providers = [];
+
+if (
+  process.env.AUTH_MICROSOFT_ENTRA_ID_ID &&
+  process.env.AUTH_MICROSOFT_ENTRA_ID_SECRET
+) {
+  providers.push(
     MicrosoftEntraId({
-      clientId: process.env.AUTH_MICROSOFT_ENTRA_ID_ID!,
-      clientSecret: process.env.AUTH_MICROSOFT_ENTRA_ID_SECRET!,
+      clientId: process.env.AUTH_MICROSOFT_ENTRA_ID_ID,
+      clientSecret: process.env.AUTH_MICROSOFT_ENTRA_ID_SECRET,
       issuer: process.env.AUTH_MICROSOFT_ENTRA_ID_TENANT_ID
         ? `https://login.microsoftonline.com/${process.env.AUTH_MICROSOFT_ENTRA_ID_TENANT_ID}/v2.0`
         : undefined,
-    }),
+    })
+  );
+}
+
+if (
+  process.env.AUTH_OKTA_ID &&
+  process.env.AUTH_OKTA_SECRET &&
+  process.env.AUTH_OKTA_ISSUER
+) {
+  providers.push(
     Okta({
-      clientId: process.env.AUTH_OKTA_ID!,
-      clientSecret: process.env.AUTH_OKTA_SECRET!,
-      issuer: process.env.AUTH_OKTA_ISSUER!,
-    }),
-  ],
+      clientId: process.env.AUTH_OKTA_ID,
+      clientSecret: process.env.AUTH_OKTA_SECRET,
+      issuer: process.env.AUTH_OKTA_ISSUER,
+    })
+  );
+}
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  adapter: PrismaAdapter(prisma),
+  providers,
+  session: {
+    // JWT strategy: sessions stored in signed cookie, edge-runtime compatible
+    strategy: "jwt",
+  },
   callbacks: {
     async signIn({ user }) {
       if (!user.email) return false;
-
-      // Assign role from env-configured email lists on first login
       const assignedRole = getEmailRole(user.email);
       if (assignedRole) {
         await prisma.user.update({
@@ -50,24 +70,35 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return true;
     },
-    async session({ session, user }) {
+    async jwt({ token, user, trigger }) {
+      // Populate token on first sign-in or explicit update
+      if (user?.email || trigger === "update") {
+        const email = (user?.email ?? token.email) as string | undefined;
+        if (email) {
+          const dbUser = await prisma.user.findUnique({
+            where: { email },
+            select: { id: true, role: true, locale: true },
+          });
+          if (dbUser) {
+            token.id = dbUser.id;
+            token.role = dbUser.role;
+            token.locale = dbUser.locale;
+          }
+        }
+      }
+      return token;
+    },
+    async session({ session, token }) {
       if (session.user) {
-        const dbUser = await prisma.user.findUnique({
-          where: { id: user.id },
-          select: { role: true, locale: true, id: true },
-        });
-        session.user.id = user.id;
-        session.user.role = dbUser?.role ?? "EMPLOYEE";
-        session.user.locale = dbUser?.locale ?? "en";
+        session.user.id = (token.id as string) ?? "";
+        session.user.role = (token.role as Role) ?? "EMPLOYEE";
+        session.user.locale = (token.locale as string) ?? "en";
       }
       return session;
     },
   },
   pages: {
     signIn: "/login",
-  },
-  session: {
-    strategy: "database",
   },
 });
 
@@ -84,3 +115,4 @@ declare module "next-auth" {
     };
   }
 }
+
