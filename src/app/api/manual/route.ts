@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { getApprover } from "@/lib/hierarchy";
-import { notify } from "@/lib/notifications";
+import { getApprover, getEffectiveApprover } from "@/lib/hierarchy";
+import { notify, escapeHtml } from "@/lib/notifications";
 import type { EntryType } from "@/generated/prisma";
 
 const MANUAL_TYPES: EntryType[] = [
@@ -46,13 +46,15 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  // Notify manager/delegate
-  const managerId = await getApprover(session.user.id);
+  // Notify the effective approver (manager or active delegate)
+  const rawManagerId = await getApprover(session.user.id);
+  const managerId = rawManagerId ? await getEffectiveApprover(rawManagerId) : null;
   if (managerId) {
     const manager = await prisma.user.findUnique({ where: { id: managerId } });
     if (manager) {
+      const displayName = escapeHtml(session.user.name ?? session.user.email ?? "");
       const subject = `New ${type} request from ${session.user.name ?? session.user.email}`;
-      const html = `<p>${session.user.name ?? session.user.email} submitted a <b>${type}</b> request requiring your approval.</p>`;
+      const html = `<p>${displayName} submitted a <b>${escapeHtml(type)}</b> request requiring your approval.</p>`;
       await notify(
         {
           email: manager.email,

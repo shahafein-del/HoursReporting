@@ -5,6 +5,7 @@ import Papa from "papaparse";
 import type { EntryType, EntryStatus } from "@/generated/prisma";
 
 const VALID_TYPES: EntryType[] = ["WORK", "VACATION", "SICK", "CHILD_SICK", "MILITARY", "MANUAL"];
+const MAX_ROWS = 1000;
 
 interface UploadRow {
   email: string;
@@ -35,19 +36,34 @@ export async function POST(request: NextRequest) {
     skipEmptyLines: true,
   });
 
+  if (data.length > MAX_ROWS) {
+    return NextResponse.json(
+      { error: `File exceeds maximum of ${MAX_ROWS} rows` },
+      { status: 400 }
+    );
+  }
+
+  // Batch-fetch all referenced users in one query
+  const emails = [...new Set(data.map((r) => r.email).filter(Boolean))];
+  const users = await prisma.user.findMany({
+    where: { email: { in: emails } },
+    select: { id: true, email: true },
+  });
+  const userByEmail = new Map(users.map((u) => [u.email, u]));
+
   const errors: { row: number; error: string }[] = [];
   const created: string[] = [];
 
   for (let i = 0; i < data.length; i++) {
     const row = data[i];
-    const rowNum = i + 2; // 1-indexed + header
+    const rowNum = i + 2; // 1-indexed + header row
 
     if (!row.email) { errors.push({ row: rowNum, error: "Missing email" }); continue; }
     if (!row.type || !VALID_TYPES.includes(row.type as EntryType)) {
       errors.push({ row: rowNum, error: `Invalid type: ${row.type}` }); continue;
     }
 
-    const user = await prisma.user.findUnique({ where: { email: row.email } });
+    const user = userByEmail.get(row.email);
     if (!user) { errors.push({ row: rowNum, error: `User not found: ${row.email}` }); continue; }
 
     const entryType = row.type as EntryType;

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { notify } from "@/lib/notifications";
+import { notify, escapeHtml } from "@/lib/notifications";
 
 export async function PATCH(
   request: NextRequest,
@@ -44,7 +44,8 @@ export async function PATCH(
   const employee = entry.user;
   const verb = action === "approve" ? "approved" : "rejected";
   const subject = `Your ${entry.type} request was ${verb}`;
-  const html = `<p>Your <b>${entry.type}</b> request has been <b>${verb}</b>${comment ? `: "${comment}"` : "."}</p>`;
+  const safeComment = comment ? escapeHtml(comment) : null;
+  const html = `<p>Your <b>${escapeHtml(entry.type)}</b> request has been <b>${verb}</b>${safeComment ? `: "${safeComment}"` : "."}</p>`;
   await notify(
     {
       email: employee.email,

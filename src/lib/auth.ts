@@ -59,14 +59,31 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
       if (!user.email) return false;
-      const assignedRole = getEmailRole(user.email);
-      if (assignedRole) {
-        await prisma.user.update({
-          where: { email: user.email },
-          data: { role: assignedRole },
+      // Only apply env-configured role on the very first sign-in (when the
+      // account row is being created). Subsequent logins must not override
+      // role changes made via the admin UI.
+      if (account) {
+        const existing = await prisma.account.findUnique({
+          where: {
+            provider_providerAccountId: {
+              provider: account.provider,
+              providerAccountId: account.providerAccountId,
+            },
+          },
         });
+        if (!existing) {
+          const assignedRole = getEmailRole(user.email);
+          if (assignedRole) {
+            // The user row is created by the adapter just before this callback;
+            // update it immediately to set the correct role.
+            await prisma.user.update({
+              where: { email: user.email },
+              data: { role: assignedRole },
+            });
+          }
+        }
       }
       return true;
     },

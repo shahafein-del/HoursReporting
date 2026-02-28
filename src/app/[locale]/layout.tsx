@@ -28,7 +28,9 @@ export default async function LocaleLayout({
   const settings = await prisma.organizationSettings.findUnique({
     where: { id: "singleton" },
   });
-  const primaryColor = settings?.primaryColor ?? "#2563eb";
+  const rawColor = settings?.primaryColor ?? "#2563eb";
+  // Validate to a safe hex colour to prevent CSS injection
+  const primaryColor = /^#[0-9a-fA-F]{3,8}$/.test(rawColor) ? rawColor : "#2563eb";
   const logoUrl = settings?.logoUrl ?? null;
   const orgName = settings?.orgName ?? "Hours Reporting";
 

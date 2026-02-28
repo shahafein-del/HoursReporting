@@ -8,6 +8,15 @@ const intlMiddleware = createMiddleware(routing);
 
 const publicRoutes = ["/login", "/api/auth"];
 
+// Build locale pattern dynamically from routing config so it stays in sync
+const localeSegment = routing.locales.join("|");
+const localePattern = new RegExp(`^\\/(${localeSegment})(\\/|$)`);
+
+function extractLocale(pathname: string): string {
+  const m = pathname.match(new RegExp(`^\\/(${localeSegment})`));
+  return m ? m[1] : routing.defaultLocale;
+}
+
 export default auth(async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -20,7 +29,6 @@ export default auth(async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const localePattern = /^\/(en|he|ar|fr)(\/|$)/;
   const pathWithoutLocale = pathname.replace(localePattern, "/");
 
   const isPublic = publicRoutes.some(
@@ -31,8 +39,7 @@ export default auth(async function proxy(request: NextRequest) {
     const session = (request as NextRequest & { auth: unknown }).auth;
 
     if (!session) {
-      const localeMatch = pathname.match(/^\/(en|he|ar|fr)/);
-      const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
+      const locale = extractLocale(pathname);
       const loginUrl = new URL(`/${locale}/login`, request.url);
       loginUrl.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(loginUrl);
@@ -43,14 +50,12 @@ export default auth(async function proxy(request: NextRequest) {
     const isManagerRoute = pathWithoutLocale.startsWith("/manager");
 
     if (isAdminRoute && role !== "ADMIN") {
-      const localeMatch = pathname.match(/^\/(en|he|ar|fr)/);
-      const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
+      const locale = extractLocale(pathname);
       return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
     }
 
     if (isManagerRoute && role !== "MANAGER" && role !== "ADMIN") {
-      const localeMatch = pathname.match(/^\/(en|he|ar|fr)/);
-      const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
+      const locale = extractLocale(pathname);
       return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
     }
 

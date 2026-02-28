@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LocationBadge from "./LocationBadge";
 
@@ -11,6 +12,7 @@ interface ClockInOutButtonProps {
 type LocationState = "captured" | "denied" | "unknown" | null;
 
 export default function ClockInOutButton({ openEntry }: ClockInOutButtonProps) {
+  const router = useRouter();
   const t = useTranslations("dashboard");
   const tLoc = useTranslations("location");
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +60,7 @@ export default function ClockInOutButton({ openEntry }: ClockInOutButtonProps) {
 
     setIsLoading(false);
     if (res.ok) {
-      window.location.reload();
+      router.refresh();
     } else {
       const data = await res.json().catch(() => ({}));
       setError(data.error ?? "An error occurred.");

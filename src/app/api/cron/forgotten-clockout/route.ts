@@ -44,8 +44,7 @@ export async function POST() {
     return notify(entry.user, subject, html, subject);
   });
 
-  // Find work-day users who never clocked in today
-  const clockedInUserIds = openEntries.map((e) => e.userId);
+  // IDs of users who already have a WORK entry today (clocked in at some point)
   const clockedInToday = await prisma.timeEntry.findMany({
     where: {
       type: "WORK",
@@ -55,8 +54,22 @@ export async function POST() {
   });
   const allClockedIds = [...new Set(clockedInToday.map((e) => e.userId))];
 
+  // IDs of users with an approved non-WORK entry covering today (leave, etc.)
+  const onLeaveToday = await prisma.timeEntry.findMany({
+    where: {
+      type: { not: "WORK" },
+      status: "APPROVED",
+      dateFrom: { lte: now },
+      dateTo: { gte: todayStart },
+    },
+    select: { userId: true },
+  });
+  const onLeaveIds = [...new Set(onLeaveToday.map((e) => e.userId))];
+
+  const exemptIds = [...new Set([...allClockedIds, ...onLeaveIds])];
+
   const notClockedIn = await prisma.user.findMany({
-    where: { id: { notIn: allClockedIds } },
+    where: { id: { notIn: exemptIds } },
     select: {
       email: true,
       notifyEmail: true,

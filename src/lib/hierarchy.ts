@@ -2,22 +2,19 @@ import { prisma } from "./prisma";
 
 /**
  * Recursively collect all subordinate user IDs for a given manager.
- * Returns the full tree of direct and indirect reports.
+ * Uses a single recursive CTE instead of N+1 queries.
  */
 export async function getSubordinateIds(managerId: string): Promise<string[]> {
-  const directReports = await prisma.user.findMany({
-    where: { managerId },
-    select: { id: true },
-  });
-
-  const ids: string[] = directReports.map((u) => u.id);
-
-  for (const report of directReports) {
-    const nested = await getSubordinateIds(report.id);
-    ids.push(...nested);
-  }
-
-  return ids;
+  const rows = await prisma.$queryRaw<{ id: string }[]>`
+    WITH RECURSIVE subordinates AS (
+      SELECT id FROM "User" WHERE "managerId" = ${managerId}
+      UNION ALL
+      SELECT u.id FROM "User" u
+      INNER JOIN subordinates s ON u."managerId" = s.id
+    )
+    SELECT id FROM subordinates
+  `;
+  return rows.map((r) => r.id);
 }
 
 /**

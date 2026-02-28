@@ -1,6 +1,17 @@
 import nodemailer from "nodemailer";
 import webpush from "web-push";
 
+// ─── HTML Escaping ────────────────────────────────────────────────────────────
+
+export function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 // Lazily configure web-push VAPID keys
 function initWebPush() {
   const pub = process.env.VAPID_PUBLIC_KEY;
