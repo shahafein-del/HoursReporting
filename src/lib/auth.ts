@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import MicrosoftEntraId from "next-auth/providers/microsoft-entra-id";
 import Okta from "next-auth/providers/okta";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -20,7 +20,7 @@ function getEmailRole(email: string): Role | null {
   return null;
 }
 
-const providers = [];
+const providers: NextAuthConfig["providers"] = [];
 
 if (
   process.env.AUTH_MICROSOFT_ENTRA_ID_ID &&

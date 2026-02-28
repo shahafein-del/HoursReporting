@@ -3,6 +3,7 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import type { Session } from "next-auth";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -17,7 +18,7 @@ function extractLocale(pathname: string): string {
   return m ? m[1] : routing.defaultLocale;
 }
 
-export default auth(async function proxy(request: NextRequest) {
+export default auth(async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Cron routes: require the shared secret header
@@ -36,7 +37,7 @@ export default auth(async function proxy(request: NextRequest) {
   );
 
   if (!isPublic && !pathname.startsWith("/api/")) {
-    const session = (request as NextRequest & { auth: unknown }).auth;
+    const session = (request as NextRequest & { auth: Session | null }).auth;
 
     if (!session) {
       const locale = extractLocale(pathname);
@@ -45,7 +46,7 @@ export default auth(async function proxy(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    const role = (session as { user?: { role?: string } }).user?.role;
+    const role = session.user?.role;
     const isAdminRoute = pathWithoutLocale.startsWith("/admin");
     const isManagerRoute = pathWithoutLocale.startsWith("/manager");
 

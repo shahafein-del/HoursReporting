@@ -28,7 +28,7 @@ export default function ApprovalQueue() {
   useEffect(() => {
     fetch("/api/approvals/pending")
       .then((r) => r.json())
-      .then(setEntries)
+      .then((data) => setEntries(data.entries ?? data))
       .finally(() => setLoading(false));
   }, []);
 
