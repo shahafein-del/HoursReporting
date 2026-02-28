@@ -1,9 +1,6 @@
-# CLAUDE.md — Hours Reporting App
+# CLAUDE.md
 
-## Project Overview
-An organizational hours reporting web application. Employees clock in/out (with optional geolocation), submit absences and manual time corrections, and managers approve non-regular entries. Supports Microsoft Azure AD and Okta SSO, four languages (EN/HE/AR/FR) with RTL layout for Hebrew and Arabic, custom org branding, notifications (email/SMS/push), weekly manager reports, and built-in dashboards.
-
----
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Tech Stack
 | Layer | Technology |
@@ -51,21 +48,14 @@ An organizational hours reporting web application. Employees clock in/out (with 
 This project uses **Prisma 7** with the new `prisma.config.ts` approach. The connection URL is in `prisma.config.ts`, not `schema.prisma`.
 
 ```bash
-# Generate Prisma client after schema changes
-npx prisma generate
-
-# Create and apply a new migration
-npx prisma migrate dev --name <migration-name>
-
-# Apply migrations in production
-npx prisma migrate deploy
-
-# Seed the database (creates default OrganizationSettings)
-npx tsx prisma/seed.ts
-
-# Open Prisma Studio (DB GUI)
-npx prisma studio
+npm run db:generate      # Generate Prisma client after schema changes
+npm run db:migrate       # Create and apply a new migration (prompts for name)
+npm run db:seed          # Seed the database (creates default OrganizationSettings)
+npm run db:studio        # Open Prisma Studio (DB GUI)
+npx prisma migrate deploy  # Apply migrations in production (no npm alias)
 ```
+
+`prisma/schema.prisma` has no datasource URL — it is intentionally absent and provided at runtime by `prisma.config.ts` at the project root. The generated client is output to `src/generated/prisma`.
 
 ### Key Models
 - **User** — SSO users with role, hierarchy (`managerId`), delegation fields, and notification preferences
@@ -101,10 +91,10 @@ Or configure an external cron tool to POST to:
 ## Authentication
 
 `src/lib/auth.ts` configures NextAuth with:
-- `MicrosoftEntraId` provider (Azure AD)
-- `Okta` provider
-- `PrismaAdapter` for session/user persistence in PostgreSQL
-- `signIn` callback assigns `ADMIN` or `MANAGER` role from env-configured email lists on first login
+- `MicrosoftEntraId` and `Okta` providers — both are **conditional**: only registered when their env vars are present, so local development without SSO credentials is supported (login page will show no buttons).
+- `PrismaAdapter` — only `Account` rows (OAuth link) are persisted. The `Session` table is unused; sessions live in signed JWTs stored in cookies.
+- `signIn` callback assigns `ADMIN` or `MANAGER` role from env email lists **only on first login** (account creation). Subsequent logins never override admin-assigned roles.
+- Role changes made via the admin UI won't propagate to existing sessions until the JWT expires (~30 days) or the user signs out and back in.
 
 **Route protection** is handled in `src/middleware.ts`:
 - All `/(en|he|ar|fr)/` routes except `/login` require an active session
@@ -174,8 +164,10 @@ Changes take effect immediately (CSS var is updated without reload via JS on the
 ## Hierarchy & Data Visibility
 
 Users are linked via `managerId` forming a tree. The `src/lib/hierarchy.ts` module provides:
-- `getSubordinateIds(managerId)` — recursive query returning all direct + indirect report IDs
+- `getSubordinateIds(managerId)` — recursive CTE returning all direct + indirect report IDs
 - `getVisibleUserIds(userId, role)` — returns IDs visible to a user based on role
+- `getApprover(userId)` — returns the direct manager's ID, or `null`
+- `getEffectiveApprover(managerId)` — returns the active delegate's ID if a delegation is in effect, otherwise the manager's ID
 
 | Role | Sees |
 |---|---|
@@ -225,6 +217,7 @@ src/
 - The `OrganizationSettings` table always has exactly one row with `id = "singleton"`.
 - Non-WORK `TimeEntry` records always start with `status = "PENDING"`.
 - Geolocation is purely informational — users are never blocked for missing location data.
+- All user-controlled strings inserted into HTML email bodies must be escaped with `escapeHtml()` from `src/lib/notifications.ts`.
 
 ---
 
