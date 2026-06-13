@@ -1,4 +1,5 @@
-import { auth } from "@/lib/auth";
+import NextAuth from "next-auth";
+import { authConfig } from "@/lib/auth.config";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import { NextResponse } from "next/server";
@@ -17,6 +18,8 @@ function extractLocale(pathname: string): string {
   const m = pathname.match(new RegExp(`^\\/(${localeSegment})`));
   return m ? m[1] : routing.defaultLocale;
 }
+
+const { auth } = NextAuth(authConfig);
 
 export default auth(async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

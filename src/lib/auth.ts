@@ -3,6 +3,7 @@ import MicrosoftEntraId from "next-auth/providers/microsoft-entra-id";
 import Okta from "next-auth/providers/okta";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./prisma";
+import { authConfig } from "./auth.config";
 import type { Role } from "@/generated/prisma";
 
 function getEmailRole(email: string): Role | null {
@@ -52,13 +53,11 @@ if (
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
   providers,
-  session: {
-    // JWT strategy: sessions stored in signed cookie, edge-runtime compatible
-    strategy: "jwt",
-  },
   callbacks: {
+    ...authConfig.callbacks,
     async signIn({ user, account }) {
       if (!user.email) return false;
       // Only apply env-configured role on the very first sign-in (when the
@@ -105,17 +104,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return token;
     },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = (token.id as string) ?? "";
-        session.user.role = (token.role as Role) ?? "EMPLOYEE";
-        session.user.locale = (token.locale as string) ?? "en";
-      }
-      return session;
-    },
-  },
-  pages: {
-    signIn: "/login",
   },
 });
 
