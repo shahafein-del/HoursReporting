@@ -20,6 +20,7 @@ export default async function LoginPage({
   const orgName = settings?.orgName ?? "Hours Reporting";
   const logoUrl = settings?.logoUrl;
   const primaryColor = settings?.primaryColor ?? "#2563eb";
+  const devLoginEnabled = process.env.ENABLE_DEV_LOGIN === "true";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -68,6 +69,59 @@ export default async function LoginPage({
             </button>
           </form>
         </div>
+
+        {devLoginEnabled && (
+          <div className="space-y-3 border-t border-dashed border-amber-300 pt-6 text-left">
+            <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">
+              Dev login (local testing only)
+            </p>
+            <form
+              action={async (formData) => {
+                "use server";
+                await signIn("dev-login", {
+                  email: formData.get("email"),
+                  name: formData.get("name"),
+                  role: formData.get("role"),
+                  redirectTo: `/${locale}/dashboard`,
+                });
+              }}
+              className="space-y-2"
+            >
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@example.com"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm"
+              />
+              <input
+                type="text"
+                name="name"
+                placeholder="Display name (optional)"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm"
+              />
+              <select
+                name="role"
+                defaultValue="ADMIN"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-sm"
+              >
+                <option value="EMPLOYEE">Employee</option>
+                <option value="MANAGER">Manager</option>
+                <option value="ADMIN">Admin</option>
+              </select>
+              <button
+                type="submit"
+                className="w-full rounded-lg py-2 px-4 text-sm font-medium text-white"
+                style={{ backgroundColor: primaryColor }}
+              >
+                Continue (dev)
+              </button>
+              <p className="text-xs text-gray-400">
+                Role only applies the first time this email signs in.
+              </p>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );

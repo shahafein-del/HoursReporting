@@ -1,6 +1,7 @@
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import MicrosoftEntraId from "next-auth/providers/microsoft-entra-id";
 import Okta from "next-auth/providers/okta";
+import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./prisma";
 import { authConfig } from "./auth.config";
@@ -48,6 +49,38 @@ if (
       clientId: process.env.AUTH_OKTA_ID,
       clientSecret: process.env.AUTH_OKTA_SECRET,
       issuer: process.env.AUTH_OKTA_ISSUER,
+    })
+  );
+}
+
+// Dev-only credentials login: lets a local/test environment sign in as any
+// email without setting up Azure AD or Okta. Must never be enabled in
+// production — gated behind an explicit opt-in env var.
+if (process.env.ENABLE_DEV_LOGIN === "true") {
+  providers.push(
+    Credentials({
+      id: "dev-login",
+      name: "Dev Login",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        name: { label: "Name", type: "text" },
+        role: { label: "Role", type: "text" },
+      },
+      async authorize(credentials) {
+        const email = (credentials?.email as string | undefined)?.trim().toLowerCase();
+        if (!email) return null;
+        const name = (credentials?.name as string | undefined)?.trim() || email.split("@")[0];
+        const requestedRole = credentials?.role as Role | undefined;
+        const role = getEmailRole(email) ?? requestedRole ?? "EMPLOYEE";
+
+        const user = await prisma.user.upsert({
+          where: { email },
+          update: {},
+          create: { email, name, role },
+        });
+
+        return { id: user.id, email: user.email, name: user.name };
+      },
     })
   );
 }
