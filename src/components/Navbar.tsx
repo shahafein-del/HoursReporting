@@ -27,6 +27,7 @@ export default function Navbar({ locale, role, orgName, logoUrl }: NavbarProps) 
     { href: `${base}/manager/approvals`, label: t("approvals"), roles: ["MANAGER", "ADMIN"] },
     { href: `${base}/manager/delegation`, label: t("delegation"), roles: ["MANAGER", "ADMIN"] },
     { href: `${base}/manager/team`, label: t("team"), roles: ["MANAGER", "ADMIN"] },
+    { href: `${base}/pricing`, label: t("pricing"), roles: ["MANAGER", "ADMIN"] },
     { href: `${base}/admin`, label: t("admin"), roles: ["ADMIN"] },
     { href: `${base}/admin/settings`, label: t("settings"), roles: ["ADMIN"] },
   ].filter((l) => l.roles.includes(role));

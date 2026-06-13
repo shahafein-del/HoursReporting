@@ -49,13 +49,14 @@ export default auth(async function middleware(request: NextRequest) {
     const role = session.user?.role;
     const isAdminRoute = pathWithoutLocale.startsWith("/admin");
     const isManagerRoute = pathWithoutLocale.startsWith("/manager");
+    const isPricingRoute = pathWithoutLocale.startsWith("/pricing");
 
     if (isAdminRoute && role !== "ADMIN") {
       const locale = extractLocale(pathname);
       return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
     }
 
-    if (isManagerRoute && role !== "MANAGER" && role !== "ADMIN") {
+    if ((isManagerRoute || isPricingRoute) && role !== "MANAGER" && role !== "ADMIN") {
       const locale = extractLocale(pathname);
       return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
     }

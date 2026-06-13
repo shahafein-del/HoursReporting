@@ -9,6 +9,7 @@
     "approvals": "Approvals",
     "delegation": "Delegation",
     "team": "My Team",
+    "pricing": "Pricing & Quotes",
     "admin": "Admin",
     "settings": "Settings",
     "upload": "Mass Upload",
@@ -176,5 +177,186 @@
     "alreadyClockedIn": "You are already clocked in.",
     "noOpenEntry": "No open clock-in found.",
     "unauthorized": "Unauthorised."
+  },
+  "pricing": {
+    "nav": {
+      "overview": "Overview",
+      "suppliers": "Suppliers",
+      "taxRules": "Tax Rules",
+      "exchangeRates": "Exchange Rates",
+      "customers": "Customers & Prospects",
+      "quotes": "Quotes"
+    },
+    "overview": {
+      "title": "Pricing & Quotes",
+      "subtitle": "Capture dynamic supplier rates and build quotes for B2B and B2C customers.",
+      "suppliersDesc": "Manage suppliers and their seasonal / contracted rates.",
+      "taxRulesDesc": "Define VAT, tourist and city tax rules per destination.",
+      "exchangeRatesDesc": "Maintain currency conversion rates used in quotes.",
+      "customersDesc": "Manage B2B agencies and B2C prospects / customers.",
+      "quotesDesc": "Build and manage quotes for prospects and customers."
+    },
+    "common": {
+      "name": "Name",
+      "type": "Type",
+      "country": "Country",
+      "city": "City",
+      "currency": "Currency",
+      "active": "Active",
+      "inactive": "Inactive",
+      "notes": "Notes",
+      "contactName": "Contact Name",
+      "contactEmail": "Contact Email",
+      "contactPhone": "Contact Phone",
+      "save": "Save",
+      "cancel": "Cancel",
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "actions": "Actions",
+      "confirmDelete": "Are you sure you want to delete this?",
+      "loading": "Loading…",
+      "noResults": "No results found.",
+      "createdAt": "Created"
+    },
+    "supplierType": {
+      "ACCOMMODATION": "Accommodation",
+      "TRANSPORT": "Transport",
+      "ACTIVITY": "Activity",
+      "GUIDE": "Guide",
+      "MEAL": "Meal",
+      "ENTRANCE_FEE": "Entrance Fee",
+      "INSURANCE": "Insurance",
+      "FLIGHT": "Flight",
+      "OTHER": "Other"
+    },
+    "rateUnit": {
+      "PER_PERSON": "Per Person",
+      "PER_NIGHT": "Per Night",
+      "PER_PERSON_PER_NIGHT": "Per Person / Night",
+      "PER_GROUP": "Per Group",
+      "PER_DAY": "Per Day",
+      "FLAT": "Flat"
+    },
+    "salesChannel": {
+      "B2B": "B2B",
+      "B2C": "B2C",
+      "BOTH": "B2B & B2C"
+    },
+    "customerType": {
+      "B2B_AGENCY": "B2B Agency",
+      "B2C_INDIVIDUAL": "B2C Individual"
+    },
+    "quoteStatus": {
+      "DRAFT": "Draft",
+      "SENT": "Sent",
+      "ACCEPTED": "Accepted",
+      "REJECTED": "Rejected",
+      "EXPIRED": "Expired"
+    },
+    "taxCalcType": {
+      "PERCENTAGE": "Percentage",
+      "FIXED_AMOUNT": "Fixed Amount"
+    },
+    "taxAppliesTo": {
+      "SUBTOTAL": "% of Subtotal",
+      "PER_PERSON_PER_NIGHT": "Per Person / Night",
+      "PER_PERSON": "Per Person",
+      "PER_BOOKING": "Per Booking"
+    },
+    "suppliers": {
+      "title": "Suppliers",
+      "subtitle": "Hotels, transport, activities and other vendors with negotiated rates.",
+      "newSupplier": "New Supplier",
+      "rates": "Rates",
+      "viewRates": "View Rates →",
+      "noSuppliers": "No suppliers yet."
+    },
+    "supplierDetail": {
+      "back": "← Back to Suppliers",
+      "ratesTitle": "Rates",
+      "newRate": "New Rate",
+      "rateName": "Rate Name",
+      "unit": "Unit",
+      "netCost": "Net Cost",
+      "channel": "Channel",
+      "validFrom": "Valid From",
+      "validTo": "Valid To",
+      "minPax": "Min Pax",
+      "maxPax": "Max Pax",
+      "taxIncluded": "Tax Included",
+      "noRates": "No rates yet."
+    },
+    "taxRules": {
+      "title": "Tax Rules",
+      "subtitle": "VAT, tourist and city taxes per destination. Use \"*\" for the country to apply globally.",
+      "newRule": "New Tax Rule",
+      "appliesTo": "Applies To",
+      "rate": "Rate",
+      "channel": "Channel",
+      "rateHint": "Percentage (e.g. 17 for 17%) or fixed amount in the selected currency.",
+      "noRules": "No tax rules yet."
+    },
+    "exchangeRates": {
+      "title": "Exchange Rates",
+      "subtitle": "Currency conversion rates used to convert supplier costs into quote currencies.",
+      "base": "From (Base)",
+      "quote": "To (Quote)",
+      "rate": "Rate",
+      "rateHint": "1 unit of \"From\" = Rate units of \"To\"",
+      "asOf": "As Of",
+      "addOrUpdate": "Add / Update Rate",
+      "noRates": "No exchange rates yet."
+    },
+    "customers": {
+      "title": "Customers & Prospects",
+      "subtitle": "B2B agencies and B2C travellers you quote for.",
+      "newCustomer": "New Customer",
+      "defaultMarkup": "Default Markup %",
+      "quotesCount": "Quotes",
+      "noCustomers": "No customers yet."
+    },
+    "quotes": {
+      "title": "Quotes",
+      "subtitle": "Build and track quotes for prospects and customers.",
+      "newQuote": "New Quote",
+      "quoteTitle": "Quote Title",
+      "customer": "Customer",
+      "validUntil": "Valid Until",
+      "status": "Status",
+      "grandTotal": "Total",
+      "open": "Open →",
+      "noQuotes": "No quotes yet."
+    },
+    "quoteBuilder": {
+      "back": "← Back to Quotes",
+      "details": "Details",
+      "lineItems": "Line Items",
+      "addLineItem": "Add Line Item",
+      "fromSupplierRate": "From Supplier Rate",
+      "manualEntry": "Manual Entry",
+      "searchRates": "Search rates…",
+      "selectRate": "Select a rate",
+      "description": "Description",
+      "quantity": "Quantity",
+      "quantityHint": "e.g. nights × pax, depending on the unit",
+      "markupPct": "Markup %",
+      "netCost": "Net Cost",
+      "exchangeRate": "FX Rate",
+      "sellPrice": "Sell Price / Unit",
+      "taxes": "Taxes",
+      "taxTotal": "Tax",
+      "lineTotal": "Line Total",
+      "subtotal": "Subtotal",
+      "grandTotal": "Grand Total",
+      "removeLine": "Remove",
+      "noLineItems": "No line items yet. Add one below.",
+      "manualUnit": "Unit",
+      "manualNetCost": "Net Cost",
+      "manualCurrency": "Currency",
+      "manualCountry": "Destination Country",
+      "manualTaxIncluded": "Net cost includes destination tax",
+      "print": "Print Quote"
+    }
   }
 }

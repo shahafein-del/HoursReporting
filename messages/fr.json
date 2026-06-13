@@ -9,6 +9,7 @@
     "approvals": "Approbations",
     "delegation": "Délégation",
     "team": "Mon équipe",
+    "pricing": "Tarification & devis",
     "admin": "Administration",
     "settings": "Paramètres",
     "upload": "Import en masse",
@@ -176,5 +177,186 @@
     "alreadyClockedIn": "Vous êtes déjà pointé.",
     "noOpenEntry": "Aucun pointage ouvert trouvé.",
     "unauthorized": "Non autorisé."
+  },
+  "pricing": {
+    "nav": {
+      "overview": "Aperçu",
+      "suppliers": "Fournisseurs",
+      "taxRules": "Règles fiscales",
+      "exchangeRates": "Taux de change",
+      "customers": "Clients & prospects",
+      "quotes": "Devis"
+    },
+    "overview": {
+      "title": "Tarification & devis",
+      "subtitle": "Capturez les tarifs dynamiques des fournisseurs et créez des devis pour vos clients B2B et B2C.",
+      "suppliersDesc": "Gérez les fournisseurs et leurs tarifs saisonniers / contractuels.",
+      "taxRulesDesc": "Définissez les règles de TVA, taxe de séjour et taxe municipale par destination.",
+      "exchangeRatesDesc": "Gérez les taux de conversion utilisés dans les devis.",
+      "customersDesc": "Gérez les agences B2B et les clients / prospects B2C.",
+      "quotesDesc": "Créez et gérez des devis pour vos prospects et clients."
+    },
+    "common": {
+      "name": "Nom",
+      "type": "Type",
+      "country": "Pays",
+      "city": "Ville",
+      "currency": "Devise",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "notes": "Notes",
+      "contactName": "Nom du contact",
+      "contactEmail": "E-mail du contact",
+      "contactPhone": "Téléphone du contact",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "add": "Ajouter",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "actions": "Actions",
+      "confirmDelete": "Voulez-vous vraiment supprimer cet élément ?",
+      "loading": "Chargement…",
+      "noResults": "Aucun résultat.",
+      "createdAt": "Créé"
+    },
+    "supplierType": {
+      "ACCOMMODATION": "Hébergement",
+      "TRANSPORT": "Transport",
+      "ACTIVITY": "Activité",
+      "GUIDE": "Guide",
+      "MEAL": "Repas",
+      "ENTRANCE_FEE": "Droit d'entrée",
+      "INSURANCE": "Assurance",
+      "FLIGHT": "Vol",
+      "OTHER": "Autre"
+    },
+    "rateUnit": {
+      "PER_PERSON": "Par personne",
+      "PER_NIGHT": "Par nuit",
+      "PER_PERSON_PER_NIGHT": "Par personne / nuit",
+      "PER_GROUP": "Par groupe",
+      "PER_DAY": "Par jour",
+      "FLAT": "Forfait"
+    },
+    "salesChannel": {
+      "B2B": "B2B",
+      "B2C": "B2C",
+      "BOTH": "B2B & B2C"
+    },
+    "customerType": {
+      "B2B_AGENCY": "Agence B2B",
+      "B2C_INDIVIDUAL": "Particulier B2C"
+    },
+    "quoteStatus": {
+      "DRAFT": "Brouillon",
+      "SENT": "Envoyé",
+      "ACCEPTED": "Accepté",
+      "REJECTED": "Refusé",
+      "EXPIRED": "Expiré"
+    },
+    "taxCalcType": {
+      "PERCENTAGE": "Pourcentage",
+      "FIXED_AMOUNT": "Montant fixe"
+    },
+    "taxAppliesTo": {
+      "SUBTOTAL": "% du sous-total",
+      "PER_PERSON_PER_NIGHT": "Par personne / nuit",
+      "PER_PERSON": "Par personne",
+      "PER_BOOKING": "Par réservation"
+    },
+    "suppliers": {
+      "title": "Fournisseurs",
+      "subtitle": "Hôtels, transports, activités et autres prestataires avec tarifs négociés.",
+      "newSupplier": "Nouveau fournisseur",
+      "rates": "Tarifs",
+      "viewRates": "Voir les tarifs →",
+      "noSuppliers": "Aucun fournisseur pour le moment."
+    },
+    "supplierDetail": {
+      "back": "← Retour aux fournisseurs",
+      "ratesTitle": "Tarifs",
+      "newRate": "Nouveau tarif",
+      "rateName": "Nom du tarif",
+      "unit": "Unité",
+      "netCost": "Coût net",
+      "channel": "Canal",
+      "validFrom": "Valide à partir de",
+      "validTo": "Valide jusqu'à",
+      "minPax": "Pax min.",
+      "maxPax": "Pax max.",
+      "taxIncluded": "Taxe incluse",
+      "noRates": "Aucun tarif pour le moment."
+    },
+    "taxRules": {
+      "title": "Règles fiscales",
+      "subtitle": "TVA, taxe de séjour et taxes municipales par destination. Utilisez \"*\" pour le pays afin d'appliquer globalement.",
+      "newRule": "Nouvelle règle fiscale",
+      "appliesTo": "S'applique à",
+      "rate": "Taux",
+      "channel": "Canal",
+      "rateHint": "Pourcentage (ex. 17 pour 17 %) ou montant fixe dans la devise sélectionnée.",
+      "noRules": "Aucune règle fiscale pour le moment."
+    },
+    "exchangeRates": {
+      "title": "Taux de change",
+      "subtitle": "Taux de conversion utilisés pour convertir les coûts fournisseurs dans les devises des devis.",
+      "base": "De (Base)",
+      "quote": "Vers (Cible)",
+      "rate": "Taux",
+      "rateHint": "1 unité de \"De\" = Taux unités de \"Vers\"",
+      "asOf": "Au",
+      "addOrUpdate": "Ajouter / Mettre à jour",
+      "noRates": "Aucun taux de change pour le moment."
+    },
+    "customers": {
+      "title": "Clients & prospects",
+      "subtitle": "Agences B2B et voyageurs B2C pour lesquels vous établissez des devis.",
+      "newCustomer": "Nouveau client",
+      "defaultMarkup": "Marge par défaut %",
+      "quotesCount": "Devis",
+      "noCustomers": "Aucun client pour le moment."
+    },
+    "quotes": {
+      "title": "Devis",
+      "subtitle": "Créez et suivez les devis pour vos prospects et clients.",
+      "newQuote": "Nouveau devis",
+      "quoteTitle": "Titre du devis",
+      "customer": "Client",
+      "validUntil": "Valable jusqu'au",
+      "status": "Statut",
+      "grandTotal": "Total",
+      "open": "Ouvrir →",
+      "noQuotes": "Aucun devis pour le moment."
+    },
+    "quoteBuilder": {
+      "back": "← Retour aux devis",
+      "details": "Détails",
+      "lineItems": "Lignes",
+      "addLineItem": "Ajouter une ligne",
+      "fromSupplierRate": "Depuis un tarif fournisseur",
+      "manualEntry": "Saisie manuelle",
+      "searchRates": "Rechercher des tarifs…",
+      "selectRate": "Sélectionner un tarif",
+      "description": "Description",
+      "quantity": "Quantité",
+      "quantityHint": "ex. nuits × pax, selon l'unité",
+      "markupPct": "Marge %",
+      "netCost": "Coût net",
+      "exchangeRate": "Taux de change",
+      "sellPrice": "Prix de vente / unité",
+      "taxes": "Taxes",
+      "taxTotal": "Taxe",
+      "lineTotal": "Total ligne",
+      "subtotal": "Sous-total",
+      "grandTotal": "Total général",
+      "removeLine": "Retirer",
+      "noLineItems": "Aucune ligne pour le moment. Ajoutez-en une ci-dessous.",
+      "manualUnit": "Unité",
+      "manualNetCost": "Coût net",
+      "manualCurrency": "Devise",
+      "manualCountry": "Pays de destination",
+      "manualTaxIncluded": "Le coût net inclut la taxe de destination",
+      "print": "Imprimer le devis"
+    }
   }
 }

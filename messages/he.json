@@ -9,6 +9,7 @@
     "approvals": "אישורים",
     "delegation": "האצלה",
     "team": "הצוות שלי",
+    "pricing": "תמחור והצעות מחיר",
     "admin": "ניהול",
     "settings": "הגדרות",
     "upload": "העלאה המונית",
@@ -176,5 +177,186 @@
     "alreadyClockedIn": "כבר רשום בעבודה.",
     "noOpenEntry": "לא נמצאה כניסה פתוחה.",
     "unauthorized": "אין הרשאה."
+  },
+  "pricing": {
+    "nav": {
+      "overview": "סקירה",
+      "suppliers": "ספקים",
+      "taxRules": "כללי מיסוי",
+      "exchangeRates": "שערי חליפין",
+      "customers": "לקוחות ופרוספקטים",
+      "quotes": "הצעות מחיר"
+    },
+    "overview": {
+      "title": "תמחור והצעות מחיר",
+      "subtitle": "תפעלו תעריפי ספקים דינמיים ובנו הצעות מחיר ללקוחות B2B ו-B2C.",
+      "suppliersDesc": "ניהול ספקים והתעריפים העונתיים / החוזיים שלהם.",
+      "taxRulesDesc": "הגדרת כללי מע\"מ, מס תיירות ומס עירוני לפי יעד.",
+      "exchangeRatesDesc": "ניהול שערי המרה המשמשים בהצעות המחיר.",
+      "customersDesc": "ניהול סוכנויות B2B ולקוחות / פרוספקטים B2C.",
+      "quotesDesc": "בניית וניהול הצעות מחיר לפרוספקטים ולקוחות."
+    },
+    "common": {
+      "name": "שם",
+      "type": "סוג",
+      "country": "מדינה",
+      "city": "עיר",
+      "currency": "מטבע",
+      "active": "פעיל",
+      "inactive": "לא פעיל",
+      "notes": "הערות",
+      "contactName": "איש קשר",
+      "contactEmail": "דוא\"ל איש קשר",
+      "contactPhone": "טלפון איש קשר",
+      "save": "שמור",
+      "cancel": "ביטול",
+      "add": "הוסף",
+      "edit": "ערוך",
+      "delete": "מחק",
+      "actions": "פעולות",
+      "confirmDelete": "למחוק את הפריט?",
+      "loading": "טוען…",
+      "noResults": "לא נמצאו תוצאות.",
+      "createdAt": "נוצר"
+    },
+    "supplierType": {
+      "ACCOMMODATION": "אירוח",
+      "TRANSPORT": "תחבורה",
+      "ACTIVITY": "פעילות",
+      "GUIDE": "מדריך",
+      "MEAL": "ארוחה",
+      "ENTRANCE_FEE": "דמי כניסה",
+      "INSURANCE": "ביטוח",
+      "FLIGHT": "טיסה",
+      "OTHER": "אחר"
+    },
+    "rateUnit": {
+      "PER_PERSON": "לאדם",
+      "PER_NIGHT": "ללילה",
+      "PER_PERSON_PER_NIGHT": "לאדם / לילה",
+      "PER_GROUP": "לקבוצה",
+      "PER_DAY": "ליום",
+      "FLAT": "סכום קבוע"
+    },
+    "salesChannel": {
+      "B2B": "B2B",
+      "B2C": "B2C",
+      "BOTH": "B2B ו-B2C"
+    },
+    "customerType": {
+      "B2B_AGENCY": "סוכנות B2B",
+      "B2C_INDIVIDUAL": "פרטי B2C"
+    },
+    "quoteStatus": {
+      "DRAFT": "טיוטה",
+      "SENT": "נשלח",
+      "ACCEPTED": "התקבל",
+      "REJECTED": "נדחה",
+      "EXPIRED": "פג תוקף"
+    },
+    "taxCalcType": {
+      "PERCENTAGE": "אחוז",
+      "FIXED_AMOUNT": "סכום קבוע"
+    },
+    "taxAppliesTo": {
+      "SUBTOTAL": "אחוז מסכום הביניים",
+      "PER_PERSON_PER_NIGHT": "לאדם / לילה",
+      "PER_PERSON": "לאדם",
+      "PER_BOOKING": "להזמנה"
+    },
+    "suppliers": {
+      "title": "ספקים",
+      "subtitle": "מלונות, תחבורה, פעילויות וספקים נוספים עם תעריפים מוסכמים.",
+      "newSupplier": "ספק חדש",
+      "rates": "תעריפים",
+      "viewRates": "צפייה בתעריפים ←",
+      "noSuppliers": "אין ספקים עדיין."
+    },
+    "supplierDetail": {
+      "back": "→ חזרה לספקים",
+      "ratesTitle": "תעריפים",
+      "newRate": "תעריף חדש",
+      "rateName": "שם התעריף",
+      "unit": "יחידה",
+      "netCost": "עלות נטו",
+      "channel": "ערוץ",
+      "validFrom": "בתוקף מ-",
+      "validTo": "בתוקף עד",
+      "minPax": "מינ' נוסעים",
+      "maxPax": "מקס' נוסעים",
+      "taxIncluded": "כולל מס",
+      "noRates": "אין תעריפים עדיין."
+    },
+    "taxRules": {
+      "title": "כללי מיסוי",
+      "subtitle": "מע\"מ, מס תיירות ומס עירוני לפי יעד. השתמשו ב-\"*\" במדינה כדי להחיל גלובלית.",
+      "newRule": "כלל מיסוי חדש",
+      "appliesTo": "חל על",
+      "rate": "שיעור",
+      "channel": "ערוץ",
+      "rateHint": "אחוז (לדוגמה 17 עבור 17%) או סכום קבוע במטבע הנבחר.",
+      "noRules": "אין כללי מיסוי עדיין."
+    },
+    "exchangeRates": {
+      "title": "שערי חליפין",
+      "subtitle": "שערי המרה המשמשים להמרת עלויות ספקים למטבעות הצעת המחיר.",
+      "base": "מ- (בסיס)",
+      "quote": "ל- (יעד)",
+      "rate": "שער",
+      "rateHint": "יחידה אחת של \"מ-\" = שער יחידות של \"ל-\"",
+      "asOf": "נכון ל-",
+      "addOrUpdate": "הוסף / עדכן שער",
+      "noRates": "אין שערי חליפין עדיין."
+    },
+    "customers": {
+      "title": "לקוחות ופרוספקטים",
+      "subtitle": "סוכנויות B2B ונוסעי B2C עבורם מכינים הצעות מחיר.",
+      "newCustomer": "לקוח חדש",
+      "defaultMarkup": "מרווח ברירת מחדל %",
+      "quotesCount": "הצעות מחיר",
+      "noCustomers": "אין לקוחות עדיין."
+    },
+    "quotes": {
+      "title": "הצעות מחיר",
+      "subtitle": "בנו ועקבו אחר הצעות מחיר לפרוספקטים ולקוחות.",
+      "newQuote": "הצעת מחיר חדשה",
+      "quoteTitle": "כותרת הצעת המחיר",
+      "customer": "לקוח",
+      "validUntil": "בתוקף עד",
+      "status": "סטטוס",
+      "grandTotal": "סה\"כ",
+      "open": "פתח ←",
+      "noQuotes": "אין הצעות מחיר עדיין."
+    },
+    "quoteBuilder": {
+      "back": "→ חזרה להצעות מחיר",
+      "details": "פרטים",
+      "lineItems": "שורות",
+      "addLineItem": "הוסף שורה",
+      "fromSupplierRate": "מתעריף ספק",
+      "manualEntry": "הזנה ידנית",
+      "searchRates": "חיפוש תעריפים…",
+      "selectRate": "בחר תעריף",
+      "description": "תיאור",
+      "quantity": "כמות",
+      "quantityHint": "לדוגמה לילות × נוסעים, בהתאם ליחידה",
+      "markupPct": "מרווח %",
+      "netCost": "עלות נטו",
+      "exchangeRate": "שער חליפין",
+      "sellPrice": "מחיר מכירה ליחידה",
+      "taxes": "מיסים",
+      "taxTotal": "מס",
+      "lineTotal": "סה\"כ שורה",
+      "subtotal": "סכום ביניים",
+      "grandTotal": "סה\"כ לתשלום",
+      "removeLine": "הסר",
+      "noLineItems": "אין שורות עדיין. הוסיפו אחת למטה.",
+      "manualUnit": "יחידה",
+      "manualNetCost": "עלות נטו",
+      "manualCurrency": "מטבע",
+      "manualCountry": "מדינת יעד",
+      "manualTaxIncluded": "העלות נטו כוללת מס יעד",
+      "print": "הדפס הצעת מחיר"
+    }
   }
 }

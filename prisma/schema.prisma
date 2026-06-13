@@ -74,6 +74,7 @@ model User {
   accounts    Account[]
   sessions    Session[]
   timeEntries TimeEntry[]
+  quotes      Quote[]
 
   createdAt DateTime @default(now())
 }
@@ -143,4 +144,242 @@ enum EntryStatus {
   PENDING // Awaiting manager approval (all non-WORK entries start here)
   APPROVED
   REJECTED
+}
+
+// ─── Pricing / CPQ (Configure-Price-Quote) Module ─────────────────────────────
+//
+// Captures dynamic supplier rates (negotiated, seasonal, contracted) and uses
+// them to build quotes for B2B (agencies) and B2C (direct travellers)
+// customers, applying currency conversion, markup and destination tax rules.
+
+model Supplier {
+  id   String       @id @default(cuid())
+  name String
+  type SupplierType
+
+  country String // ISO 3166-1 alpha-2 (destination country, drives tax rules)
+  city    String?
+
+  currency String // ISO 4217 — default currency this supplier quotes in
+
+  contactName  String?
+  contactEmail String?
+  contactPhone String?
+  notes        String?
+  active       Boolean @default(true)
+
+  rates SupplierRate[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SupplierRate {
+  id         String   @id @default(cuid())
+  supplierId String
+  supplier   Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+
+  name     String // e.g. "Standard Double Room – High Season"
+  unit     RateUnit
+  netCost  Decimal      @db.Decimal(10, 2) // cost per unit, in `currency`
+  currency String // ISO 4217 — may differ from supplier default
+  channel  SalesChannel @default(BOTH) // which sales channel(s) this rate may be used for
+
+  // Validity window — supports seasonal / dynamic rate periods
+  validFrom DateTime
+  validTo   DateTime
+
+  minPax Int?
+  maxPax Int?
+
+  // Whether destination VAT/sales tax is already baked into netCost
+  // (common for net rates from DMCs under EU margin schemes)
+  taxIncluded Boolean @default(false)
+
+  active Boolean @default(true)
+  notes  String?
+
+  quoteLineItems QuoteLineItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([supplierId])
+  @@index([validFrom, validTo])
+}
+
+model TaxRule {
+  id   String @id @default(cuid())
+  name String // e.g. "Standard VAT", "Tourist City Tax"
+
+  country String // ISO 3166-1 alpha-2, or "*" to apply to all destinations
+
+  type      TaxCalcType
+  appliesTo TaxAppliesTo
+
+  // For PERCENTAGE: rate is a percentage (e.g. 17 = 17%)
+  // For FIXED_AMOUNT: rate is a flat amount in `currency`
+  rate     Decimal @db.Decimal(8, 3)
+  currency String? // required for FIXED_AMOUNT rules
+
+  channel SalesChannel @default(BOTH)
+  active  Boolean      @default(true)
+  notes   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([country])
+}
+
+model ExchangeRate {
+  id String @id @default(cuid())
+
+  base  String // ISO 4217 source currency
+  quote String // ISO 4217 target currency
+  rate  Decimal @db.Decimal(14, 6) // 1 unit of `base` = `rate` units of `quote`
+
+  asOf DateTime @default(now())
+
+  @@unique([base, quote])
+}
+
+model Customer {
+  id   String       @id @default(cuid())
+  name String
+  type CustomerType // B2B agency vs B2C individual traveller
+
+  country  String?
+  currency String  @default("USD") // currency quotes are issued in for this customer
+
+  // Default markup applied to net supplier costs for this customer.
+  // B2B agencies typically get net rates (low/zero markup, they apply their
+  // own); B2C travellers get full retail markup.
+  defaultMarkupPct Decimal @default(0) @db.Decimal(5, 2)
+
+  contactName  String?
+  contactEmail String?
+  contactPhone String?
+  notes        String?
+
+  quotes Quote[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Quote {
+  id         String   @id @default(cuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  title      String
+  currency   String // ISO 4217 — currency the quote is presented in
+  status     QuoteStatus @default(DRAFT)
+  validUntil DateTime?
+  notes      String?
+
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+
+  lineItems QuoteLineItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([customerId])
+}
+
+model QuoteLineItem {
+  id      String @id @default(cuid())
+  quoteId String
+  quote   Quote  @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+
+  // Optional link back to the supplier rate this line was derived from
+  supplierRateId String?
+  supplierRate   SupplierRate? @relation(fields: [supplierRateId], references: [id])
+
+  description String
+  unit        RateUnit
+  quantity    Decimal @db.Decimal(10, 2) // e.g. pax × nights, depending on unit
+
+  // Cost side (as captured from the supplier rate)
+  netCost         Decimal @db.Decimal(10, 2) // per-unit cost in netCostCurrency
+  netCostCurrency String
+  exchangeRate    Decimal @default(1) @db.Decimal(14, 6) // netCostCurrency -> quote.currency
+
+  // Pricing side
+  markupPct Decimal @default(0) @db.Decimal(5, 2)
+  sellPrice Decimal @db.Decimal(10, 2) // per-unit sell price in quote currency, excl. tax
+
+  // Destination country (drives tax rule matching) and whether netCost
+  // already includes destination VAT — retained so the line can be
+  // recalculated after quantity/markup edits.
+  country     String
+  taxIncluded Boolean @default(false)
+
+  // Tax snapshot — array of { name, type, appliesTo, rate, amount }
+  taxBreakdown Json?
+  taxTotal     Decimal @default(0) @db.Decimal(10, 2)
+
+  lineTotal Decimal @db.Decimal(10, 2) // (sellPrice * quantity) + taxTotal, in quote currency
+
+  sortOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([quoteId])
+}
+
+enum SupplierType {
+  ACCOMMODATION
+  TRANSPORT
+  ACTIVITY
+  GUIDE
+  MEAL
+  ENTRANCE_FEE
+  INSURANCE
+  FLIGHT
+  OTHER
+}
+
+enum RateUnit {
+  PER_PERSON
+  PER_NIGHT
+  PER_PERSON_PER_NIGHT
+  PER_GROUP
+  PER_DAY
+  FLAT
+}
+
+enum SalesChannel {
+  B2B
+  B2C
+  BOTH
+}
+
+enum CustomerType {
+  B2B_AGENCY
+  B2C_INDIVIDUAL
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+enum TaxCalcType {
+  PERCENTAGE
+  FIXED_AMOUNT
+}
+
+enum TaxAppliesTo {
+  SUBTOTAL // percentage of the line's pre-tax sell subtotal (e.g. VAT)
+  PER_PERSON_PER_NIGHT // fixed amount × quantity (e.g. tourist/city tax)
+  PER_PERSON // fixed amount × quantity (for per-person units)
+  PER_BOOKING // fixed amount, applied once per line
 }

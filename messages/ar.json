@@ -9,6 +9,7 @@
     "approvals": "الموافقات",
     "delegation": "التفويض",
     "team": "فريقي",
+    "pricing": "التسعير وعروض الأسعار",
     "admin": "الإدارة",
     "settings": "الإعدادات",
     "upload": "الرفع الجماعي",
@@ -176,5 +177,186 @@
     "alreadyClockedIn": "أنت مسجَّل بالفعل.",
     "noOpenEntry": "لم يُعثر على تسجيل حضور مفتوح.",
     "unauthorized": "غير مصرح."
+  },
+  "pricing": {
+    "nav": {
+      "overview": "نظرة عامة",
+      "suppliers": "الموردون",
+      "taxRules": "قواعد الضرائب",
+      "exchangeRates": "أسعار الصرف",
+      "customers": "العملاء والعملاء المحتملون",
+      "quotes": "عروض الأسعار"
+    },
+    "overview": {
+      "title": "التسعير وعروض الأسعار",
+      "subtitle": "سجّل أسعار الموردين الديناميكية وأنشئ عروض أسعار لعملاء B2B وB2C.",
+      "suppliersDesc": "إدارة الموردين وأسعارهم الموسمية / التعاقدية.",
+      "taxRulesDesc": "تحديد قواعد ضريبة القيمة المضافة وضريبة السياحة والضريبة البلدية لكل وجهة.",
+      "exchangeRatesDesc": "إدارة أسعار صرف العملات المستخدمة في عروض الأسعار.",
+      "customersDesc": "إدارة وكالات B2B وعملاء/عملاء محتملين B2C.",
+      "quotesDesc": "إنشاء وإدارة عروض الأسعار للعملاء المحتملين والعملاء."
+    },
+    "common": {
+      "name": "الاسم",
+      "type": "النوع",
+      "country": "الدولة",
+      "city": "المدينة",
+      "currency": "العملة",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "notes": "ملاحظات",
+      "contactName": "اسم جهة الاتصال",
+      "contactEmail": "البريد الإلكتروني لجهة الاتصال",
+      "contactPhone": "هاتف جهة الاتصال",
+      "save": "حفظ",
+      "cancel": "إلغاء",
+      "add": "إضافة",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "actions": "إجراءات",
+      "confirmDelete": "هل تريد حذف هذا العنصر؟",
+      "loading": "جارٍ التحميل…",
+      "noResults": "لا توجد نتائج.",
+      "createdAt": "تاريخ الإنشاء"
+    },
+    "supplierType": {
+      "ACCOMMODATION": "إقامة",
+      "TRANSPORT": "نقل",
+      "ACTIVITY": "نشاط",
+      "GUIDE": "مرشد",
+      "MEAL": "وجبة",
+      "ENTRANCE_FEE": "رسوم دخول",
+      "INSURANCE": "تأمين",
+      "FLIGHT": "طيران",
+      "OTHER": "أخرى"
+    },
+    "rateUnit": {
+      "PER_PERSON": "للفرد",
+      "PER_NIGHT": "لليلة",
+      "PER_PERSON_PER_NIGHT": "للفرد / الليلة",
+      "PER_GROUP": "للمجموعة",
+      "PER_DAY": "لليوم",
+      "FLAT": "مبلغ ثابت"
+    },
+    "salesChannel": {
+      "B2B": "B2B",
+      "B2C": "B2C",
+      "BOTH": "B2B و B2C"
+    },
+    "customerType": {
+      "B2B_AGENCY": "وكالة B2B",
+      "B2C_INDIVIDUAL": "فرد B2C"
+    },
+    "quoteStatus": {
+      "DRAFT": "مسودة",
+      "SENT": "مُرسل",
+      "ACCEPTED": "مقبول",
+      "REJECTED": "مرفوض",
+      "EXPIRED": "منتهي الصلاحية"
+    },
+    "taxCalcType": {
+      "PERCENTAGE": "نسبة مئوية",
+      "FIXED_AMOUNT": "مبلغ ثابت"
+    },
+    "taxAppliesTo": {
+      "SUBTOTAL": "نسبة من الإجمالي الفرعي",
+      "PER_PERSON_PER_NIGHT": "للفرد / الليلة",
+      "PER_PERSON": "للفرد",
+      "PER_BOOKING": "للحجز"
+    },
+    "suppliers": {
+      "title": "الموردون",
+      "subtitle": "الفنادق والنقل والأنشطة وموردون آخرون بأسعار متفاوض عليها.",
+      "newSupplier": "مورد جديد",
+      "rates": "الأسعار",
+      "viewRates": "عرض الأسعار ←",
+      "noSuppliers": "لا يوجد موردون حتى الآن."
+    },
+    "supplierDetail": {
+      "back": "→ العودة إلى الموردين",
+      "ratesTitle": "الأسعار",
+      "newRate": "سعر جديد",
+      "rateName": "اسم السعر",
+      "unit": "الوحدة",
+      "netCost": "التكلفة الصافية",
+      "channel": "القناة",
+      "validFrom": "ساري من",
+      "validTo": "ساري حتى",
+      "minPax": "أدنى عدد ركاب",
+      "maxPax": "أقصى عدد ركاب",
+      "taxIncluded": "شامل الضريبة",
+      "noRates": "لا توجد أسعار حتى الآن."
+    },
+    "taxRules": {
+      "title": "قواعد الضرائب",
+      "subtitle": "ضريبة القيمة المضافة وضريبة السياحة والضريبة البلدية لكل وجهة. استخدم \"*\" في حقل الدولة للتطبيق على الجميع.",
+      "newRule": "قاعدة ضريبية جديدة",
+      "appliesTo": "تنطبق على",
+      "rate": "النسبة/القيمة",
+      "channel": "القناة",
+      "rateHint": "نسبة مئوية (مثل 17 لـ 17%) أو مبلغ ثابت بالعملة المحددة.",
+      "noRules": "لا توجد قواعد ضريبية حتى الآن."
+    },
+    "exchangeRates": {
+      "title": "أسعار الصرف",
+      "subtitle": "أسعار التحويل المستخدمة لتحويل تكاليف الموردين إلى عملات عروض الأسعار.",
+      "base": "من (الأساس)",
+      "quote": "إلى (الهدف)",
+      "rate": "السعر",
+      "rateHint": "وحدة واحدة من \"من\" = السعر من وحدات \"إلى\"",
+      "asOf": "بتاريخ",
+      "addOrUpdate": "إضافة / تحديث السعر",
+      "noRates": "لا توجد أسعار صرف حتى الآن."
+    },
+    "customers": {
+      "title": "العملاء والعملاء المحتملون",
+      "subtitle": "وكالات B2B ومسافرو B2C الذين تقوم بإعداد عروض أسعار لهم.",
+      "newCustomer": "عميل جديد",
+      "defaultMarkup": "هامش الربح الافتراضي %",
+      "quotesCount": "عروض الأسعار",
+      "noCustomers": "لا يوجد عملاء حتى الآن."
+    },
+    "quotes": {
+      "title": "عروض الأسعار",
+      "subtitle": "أنشئ وتابع عروض الأسعار للعملاء المحتملين والعملاء.",
+      "newQuote": "عرض سعر جديد",
+      "quoteTitle": "عنوان عرض السعر",
+      "customer": "العميل",
+      "validUntil": "ساري حتى",
+      "status": "الحالة",
+      "grandTotal": "الإجمالي",
+      "open": "فتح ←",
+      "noQuotes": "لا توجد عروض أسعار حتى الآن."
+    },
+    "quoteBuilder": {
+      "back": "→ العودة إلى عروض الأسعار",
+      "details": "التفاصيل",
+      "lineItems": "البنود",
+      "addLineItem": "إضافة بند",
+      "fromSupplierRate": "من سعر مورد",
+      "manualEntry": "إدخال يدوي",
+      "searchRates": "بحث عن أسعار…",
+      "selectRate": "اختر سعرًا",
+      "description": "الوصف",
+      "quantity": "الكمية",
+      "quantityHint": "مثال: عدد الليالي × عدد الركاب، حسب الوحدة",
+      "markupPct": "هامش الربح %",
+      "netCost": "التكلفة الصافية",
+      "exchangeRate": "سعر الصرف",
+      "sellPrice": "سعر البيع / الوحدة",
+      "taxes": "الضرائب",
+      "taxTotal": "الضريبة",
+      "lineTotal": "إجمالي البند",
+      "subtotal": "الإجمالي الفرعي",
+      "grandTotal": "الإجمالي الكلي",
+      "removeLine": "إزالة",
+      "noLineItems": "لا توجد بنود حتى الآن. أضف بندًا أدناه.",
+      "manualUnit": "الوحدة",
+      "manualNetCost": "التكلفة الصافية",
+      "manualCurrency": "العملة",
+      "manualCountry": "دولة الوجهة",
+      "manualTaxIncluded": "التكلفة الصافية تشمل ضريبة الوجهة",
+      "print": "طباعة عرض السعر"
+    }
   }
 }
